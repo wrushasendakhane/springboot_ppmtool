@@ -42,14 +42,14 @@ public class ProjectService {
       project.setProjectLeader(user.getUsername());
       String projectIdentifier = project.getProjectIdentifier().toUpperCase();
       project.setProjectIdentifier(projectIdentifier);
-      if (project.getId() == null) {
+      if (project.getId() == null || project.getId() == 0) {
         Backlog backlog = new Backlog();
         backlog.setProjectIdentifier(projectIdentifier);
         backlog.setProject(project);
         project.setBacklog(backlog);
       }
 
-      if (project.getId() != null) {
+      if (project.getId() != null && project.getId() > 0) {
         project.setBacklog(backlogRepository.findByProjectIdentifier(projectIdentifier));
       }
 
